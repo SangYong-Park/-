@@ -58,17 +58,54 @@ sungjuk['LEE'] = [80, 85 ,81]
 # listup2.sort(key=lambda element:element[1], reverse=True)
 # print(listup2)
 
+def validateNumber(numVal, numMin, numMax):
+    pass
+
 while True:
     print("##현재 등록자 수:", len(sungjuk))
-    cmd = int(input("1) 성적입력 2) 성적출력 3) 성적조회 (1~3) 4) 종료 -> "))
+    # 1. 입력값이 숫자(1~4) 인지 확인
+    try:
+        cmd = int(input("1) 성적입력 2) 성적출력 3) 성적조회 (1~3) 4) 종료 -> "))
+        # isValid = validateNumber(cmd, 1, 4)
+        if cmd <0 or cmd > 4:
+            raise ValueError 
+    except ValueError as ex:
+        print("1~4 사이의 정수를 입력해주세요.")
+        continue
     if cmd == 1:
-            userData = input('성적을 입력하세요. (이름, 국어, 영어, 수학) ->')
-            print(userData) # '홍길동,100,90,78'
-            print(userData.split())
-            data = userData.split(',')  # split은 문자열을 쪼개는 함수. 인자는 ','를 받아서 이것 단위로 쪼갬
-            print(data) #['홍길동','100','90','70']
-            # sungjuk['name'] = ['100','75','70']
-            sungjuk[data[0]] = [int(data[1]), int(data[2]), int(data[3])]
+            # 2. 이름 뒤의 3개의 과목인지, ','로 구분되어 있는지
+            # 3. 각 과목의 점수는 0~100     
+            while True:
+                try:
+                    userData = input('성적을 입력하세요. (이름, 국어, 영어, 수학) ->')
+                    data = userData.split(',') # len(data) = 4 # split은 문자열을 쪼개는 함수. 인자는 ','를 받아서 이것 단위로 쪼갬
+                    if len(data) != 4: #Error
+                        raise Exception
+                    else:
+                        try:
+                            kor = int(data[1]) 
+                            eng = int(data[2])
+                            mat = int(data[3])
+                            # isValid = validateNumber(kor, 0, 100)
+                            # isValid = validateNumber(eng, 0, 100)   
+                            # isValid = validateNumber(mat, 0, 100)                          
+                            if kor < 0 or kor > 100:
+                                raise Exception
+                            if eng < 0 or eng > 100:
+                                raise Exception
+                            if mat < 0 or mat > 100:
+                                raise Exception
+
+                        except:
+                            raise Exception
+                except Exception as ex:
+                    print("** 성적데이터를 정확하게 입력해주세요.")
+                    continue
+                else:
+                    print(data) #['홍길동','100','90','70']
+                    # sungjuk['name'] = ['100','75','70']
+                    sungjuk[data[0]] = [int(data[1]), int(data[2]), int(data[3])]
+                    break
     elif cmd == 2:
         # 정보 출력 sungjuk(3)
         print('##################################')
