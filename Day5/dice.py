@@ -30,6 +30,7 @@ while True:
               dic[7-i] = output.count(7-i)
 
         item = list(dic.items())
+        print(item)
         item.sort(key=lambda element:element[1],reverse=True)
 
         for final in item:

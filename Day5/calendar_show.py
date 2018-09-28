@@ -43,6 +43,28 @@ import calendar
 # localtime 
 
 string_weekday = ['월','화','수','목','금','토','일']
-day = calendar.weekday(2019, 2, 28)
-print(day)
-print(string_weekday[day])
+# day = calendar.weekday(2018, 9, 30)
+# print(day)
+# print(string_weekday[day])
+
+month = int(input("출력하고자 하는 달을 입력해주세요."))
+
+for i in range(7):
+    print("%2s" % string_weekday[i],end="")
+
+
+day = calendar.weekday(2018, month, 1)
+dateNum = 1
+count = 1
+while True:
+    try:
+        calendar.weekday(2018,month,count)
+    except ValueError as verr:
+        break
+    else:
+        if count < day:
+            print("%4s" % " ",end="")
+            count+=1
+        else:
+            print("%2s" % (str(count)),end="")
+            count+=1
